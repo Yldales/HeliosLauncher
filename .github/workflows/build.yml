@@ -34,7 +34,7 @@ jobs:
 
       - name: Replace %REMOTE_DISTRO_URL% with secret
         run: |
-          sed -i 's/%REMOTE_DISTRO_URL%/${{ secrets.REMOTE_DISTRO_URL }}/g' $(find . -type f)
+          sed -i 's#%REMOTE_DISTRO_URL%#${{ secrets.REMOTE_DISTRO_URL }}#g' $(find . -type f)
         shell: bash
 
       - name: Install Dependencies
