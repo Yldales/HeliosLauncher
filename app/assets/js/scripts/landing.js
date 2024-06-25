@@ -42,6 +42,8 @@ const user_text               = document.getElementById('user_text')
 
 const loggerLanding = LoggerUtil.getLogger('Landing')
 
+const fs = require('fs');
+
 /* Launch Progress Wrapper Functions */
 
 /**
@@ -171,17 +173,20 @@ function updateSelectedServer(serv){
     updateBackgroundImage(serv)
 }
 
-function updateBackgroundImage(serv = null) {
-    
+function updateBackgroundImage(serv) {
+
     // ...
-    let background_urls = null;
-    if (serv == null) {
-        console.log('No server selected. Using default background.')
-        let background_urls = Math.floor((Math.random() * fs.readdirSync(path.join(__dirname, 'app', 'assets', 'images', 'background_urls')).length));
+    let background_urls = [];
+
+    // ...
+    if (serv && serv.rawServer.backgrounds && serv.rawServer.backgrounds.length > 0) {
+        console.log('Server selected. Using server background.');
+        background_urls = serv.rawServer.backgrounds;
     } else {
-        console.log('Server selected. Using server background.')
-        let background_urls = serv.rawServer.backgrounds;
+        console.log('No server selected. Using default background.');
+        background_urls = fs.readdirSync('app/assets/images/backgrounds/').map(file => `assets/images/backgrounds/${file}`);
     }
+
     // ...
     let background_url = background_urls[Math.floor(Math.random() * background_urls.length)];
     document.body.style.backgroundImage = `url('${background_url}')`;
