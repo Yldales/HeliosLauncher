@@ -28,14 +28,7 @@ jobs:
         with:
           python-version: 3.x
 
-      - name: Echo %REMOTE_DISTRO_URL%
-        run: echo ${{ secrets.REMOTE_DISTRO_URL }}
-        shell: bash
 
-      - name: Replace %REMOTE_DISTRO_URL% with secret
-        run: |
-          sed -i 's#%REMOTE_DISTRO_URL%#${{ secrets.REMOTE_DISTRO_URL }}#g' $(find . -type f)
-        shell: bash
 
       - name: Install Dependencies
         run: npm ci
