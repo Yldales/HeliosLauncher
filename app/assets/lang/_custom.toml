@@ -12,7 +12,7 @@ mediaDiscordURL = "https://discord.gg/zNWUXdt"
 
 [ejs.settings]
 sourceGithubLink = "https://github.com/dscalZi/HeliosLauncher"
-supportLink = "https://github.com/dscalZi/HeliosLauncher/issues"
+supportLink = "https://github.com/Yldales/HeliosLauncher/issues"
 
 [ejs.welcome]
 welcomeHeader = "WELCOME TO WESTEROSCRAFT"
