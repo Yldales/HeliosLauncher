@@ -174,19 +174,13 @@ function updateSelectedServer(serv){
 function updateBackgroundImage(serv = null) {
     
     // ...
-    let background_urls = [
-        'https://images.unsplash.com/photo-1580757468214-c73f7062a5cb'
-    ];
-
-    // ...
+    let background_urls = null;
     if (serv == null) {
         console.log('No server selected. Using default background.')
         let background_urls = Math.floor((Math.random() * fs.readdirSync(path.join(__dirname, 'app', 'assets', 'images', 'background_urls')).length));
     } else {
         console.log('Server selected. Using server background.')
-        let background_urls = [
-            'https://images.unsplash.com/photo-1580757468214-c73f7062a5cb'
-        ];
+        let background_urls = serv.rawServer.backgrounds;
     }
     // ...
     let background_url = background_urls[Math.floor(Math.random() * background_urls.length)];
