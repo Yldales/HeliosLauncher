@@ -42,6 +42,8 @@ const user_text               = document.getElementById('user_text')
 
 const loggerLanding = LoggerUtil.getLogger('Landing')
 
+const fs = require('fs');
+
 /* Launch Progress Wrapper Functions */
 
 /**
@@ -168,7 +170,28 @@ function updateSelectedServer(serv){
         animateSettingsTabRefresh()
     }
     setLaunchEnabled(serv != null)
+    updateBackgroundImage(serv)
 }
+
+function updateBackgroundImage(serv) {
+
+    // ...
+    let background_urls = [];
+
+    // ...
+    if (serv && serv.rawServer.backgrounds && serv.rawServer.backgrounds.length > 0) {
+        console.log('Server selected. Using server background.');
+        background_urls = serv.rawServer.backgrounds;
+    } else {
+        console.log('No server selected. Using default background.');
+        background_urls = fs.readdirSync('app/assets/images/backgrounds/').map(file => `assets/images/backgrounds/${file}`);
+    }
+
+    // ...
+    let background_url = background_urls[Math.floor(Math.random() * background_urls.length)];
+    document.body.style.backgroundImage = `url('${background_url}')`;
+}
+
 // Real text is set in uibinder.js on distributionIndexDone.
 server_selection_button.innerHTML = '&#8226; ' + Lang.queryJS('landing.selectedServer.loading')
 server_selection_button.onclick = async e => {
