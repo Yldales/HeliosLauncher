@@ -183,8 +183,13 @@ function updateBackgroundImage(serv) {
         console.log('Server selected. Using server background.');
         background_urls = serv.rawServer.backgrounds;
     } else {
-        console.log('No server selected. Using default background.');
-        background_urls = fs.readdirSync('./app/assets/images/backgrounds/').map(file => `assets/images/backgrounds/${file}`);
+        const backgroundsDir = './app/assets/images/backgrounds/';
+        if (fs.existsSync(backgroundsDir)) {
+            console.log('No server selected. Using default background.');
+            background_urls = fs.readdirSync(backgroundsDir).map(file => `assets/images/backgrounds/${file}`);
+        } else {
+            console.log('No server selected. Default background directory does not exist.');
+        }
     }
 
     // ...
