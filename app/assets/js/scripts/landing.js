@@ -184,7 +184,7 @@ function updateBackgroundImage(serv) {
         background_urls = serv.rawServer.backgrounds;
     } else {
         console.log('No server selected. Using default background.');
-        background_urls = fs.readdirSync('app/assets/images/backgrounds/').map(file => `assets/images/backgrounds/${file}`);
+        background_urls = fs.readdirSync('./app/assets/images/backgrounds/').map(file => `assets/images/backgrounds/${file}`);
     }
 
     // ...
